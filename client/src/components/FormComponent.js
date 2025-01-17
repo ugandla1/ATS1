@@ -12,7 +12,6 @@ const FormComponent = () => {
         OpeningDate: "",
         ExpiryDate: "",
         TotalOpenings: "",
-        Experience: "",
         JobDes: "",
         Location: "",
         SalaryType: "",
@@ -60,7 +59,6 @@ const FormComponent = () => {
         OpeningDate: "",
         ExpiryDate: "",
         TotalOpenings: "",
-        Experience: "",
         JobDes: "",
         Location: "",
         SalaryType: "",
@@ -102,12 +100,7 @@ const FormComponent = () => {
   <input type="date" name="ExpiryDate" onChange={handleInputChange} />
 
       </div>
-      <div >
-      <label >Experience </label>
-
-  <input  type="text" name="Experience" onChange={handleInputChange} />
-
-      </div>
+      
       <div >
       <label >JobDes </label>
 

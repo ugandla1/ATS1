@@ -1,7 +1,12 @@
 // server/routes/dataRoutes.js
 const express = require('express');
+const http = require('http');
 const router = express.Router();
 const Data = require('../models/datamodel');
+
+
+
+
 
 // POST request to add data to the database
 router.post('/data', async (req, res) => {
@@ -47,5 +52,19 @@ router.post('/data', async (req, res) => {
     });
   }
 });
+
+// GET API to fetch all jobs
+router.get('/jobs', async (req, res) => {
+  console.log('GET /api/jobs called'); // Debug log
+  try {
+    const jobs = await Data.find(); // Fetch all jobs
+    res.status(200).json(jobs); // Send the jobs as JSON
+  } catch (err) {
+    console.error('Error fetching jobs:', err);
+    res.status(500).json({ message: 'Failed to fetch jobs' });
+  }
+});
+
+
 
 module.exports = router;

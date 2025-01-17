@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dataRoutes = require('./routes/dataroutes');
 
+
 // Initialize express app
 const app = express();
 
@@ -24,6 +25,8 @@ mongoose.connect('mongodb+srv://umeshkumar1494:1234@cluster0.4jatw.mongodb.net/?
   .catch((err) => {
     console.log('Error connecting to MongoDB:', err);
   });
+
+ 
 
 // Use routes
 app.use((req, res, next) => {
