@@ -4,14 +4,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dataRoutes = require('./routes/dataroutes');
+const Application = require('./routes/ApplicationRoutes')
 
 
 // Initialize express app
 const app = express();
 
 // Middlewares
-app.use(express.json()); // Parse JSON data
-app.use(cors()); // Enable CORS
+app.use(express.json()); 
+app.use(cors()); 
 
 
 // MongoDB connection
@@ -26,7 +27,7 @@ mongoose.connect('mongodb+srv://umeshkumar1494:1234@cluster0.4jatw.mongodb.net/?
     console.log('Error connecting to MongoDB:', err);
   });
 
- 
+ console.log("route setup complete ");
 
 // Use routes
 app.use((req, res, next) => {
@@ -35,9 +36,12 @@ app.use((req, res, next) => {
   });
   
 app.use('/api', dataRoutes);
+app.use('/api',Application);
+console.log("Application routes are loaded.");
+
 
 // Start the server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

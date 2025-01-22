@@ -11,8 +11,6 @@ const Data = require('../models/datamodel');
 // POST request to add data to the database
 router.post('/data', async (req, res) => {
   try {
-    console.log('Received Request Body:', req.body); // Debug incoming request
-
     const {
         
         JobID,
