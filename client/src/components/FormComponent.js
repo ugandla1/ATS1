@@ -21,7 +21,7 @@ const FormComponent = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   // Handle change in form input fields
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) =>  {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -35,7 +35,7 @@ const FormComponent = () => {
 
     try {
       // Make a POST request to the backend API
-      const response = await axios.post('http://localhost:5001/api/data', formData);
+      const response = await axios.post('http://localhost:5004/api/data', formData);
       console.log('Response:', response.data);
 
 

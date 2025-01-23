@@ -1,47 +1,22 @@
-// server/server.js
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const dataRoutes = require('./routes/dataroutes');
-const Application = require('./routes/ApplicationRoutes')
+const connectDB = require('./config/dbconnection');
+const logger = require('./middleware/logger');
+const dataRoutes = require('./routes/dataRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 
-
-// Initialize express app
 const app = express();
 
-// Middlewares
-app.use(express.json()); 
-app.use(cors()); 
+// Middleware
+app.use(logger);
+app.use(express.json());
 
+// Connect to database
+connectDB();
 
-// MongoDB connection
-mongoose.connect('mongodb+srv://umeshkumar1494:1234@cluster0.4jatw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.log('Error connecting to MongoDB:', err);
-  });
-
- console.log("route setup complete ");
-
-// Use routes
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-  });
-  
+// Routes
 app.use('/api', dataRoutes);
-app.use('/api',Application);
-console.log("Application routes are loaded.");
+app.use('/api', applicationRoutes);
 
-
-// Start the server
-const PORT = process.env.PORT || 5002;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5004;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -27,7 +27,7 @@ const ApplyPage = () => {
     data.append('jobId', jobId);
 
     try {
-      const response = await axios.post('http://localhost:5002/api/jobs', data, {
+      const response = await axios.post('http://localhost:5004/api/jobs', data, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       alert('Application submitted successfully!');
