@@ -26,4 +26,19 @@ router.get('/jobs', async (req, res) => {
     }
 });
 
+
+router.delete('/data/:JobID', async(req,res)=> {
+  const {JobID} = req.params;
+  try{
+    const deleteData = await Data.findOneAndDelete({ JobID });
+    if(!deleteData){
+      return res.status(404).json({error:'Data Not found'});
+    }
+    res.status(200).json({message: 'data deleted Succesfully', data:deleteData });
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error: 'Failed to delete data'});
+  }
+});
+
 module.exports = router;
