@@ -41,4 +41,19 @@ router.delete('/data/:JobID', async(req,res)=> {
   }
 });
 
+router.put('/data/:JobID', async(req,res)=>{
+  const {JobID} = req.params;
+  const update = req.body;
+  try {
+    const UpdateData = await Data.findOneAndUpdate({JobID}, update, {new: true, runValidators:true});
+    if(!update){
+      res.status(404).json({error:'Job Not found '});
+    }
+    res.status(200).json({message : 'Job Post updated sucessfully', data:UpdateData});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error: 'Failed to update Job'});
+  }
+});
+
 module.exports = router;
